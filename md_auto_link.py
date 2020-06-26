@@ -11,24 +11,35 @@ import googlesearch
 PATTERN_DEFAULT = '\[([^\[\]]+)\](?!\(.*\))'
 
 def get_site_filter(filter_file):
-    f = open(filter_file, "rt")
     result = ""
+    f = open(filter_file, "rt")
     for line in f:
         if line[0] == '#':
             continue
         line = line.strip()
         if result:
-            result += " OR site:"+line
+            result += " OR site:"+line+" "
         else:
-            result = "site:"+line
+            result = "site:"+line+" "
     f.close()
     return result
+
+def get_patterns(pattern_file):
+    patterns = []
+    f = open(pattern_file, "rt")
+    for line in f:
+        if line[0] == '#':
+            continue
+        line = line.strip()
+        patterns.append(line)
+    f.close()
+    return patterns
 
 def add_link(m):
     text = m[1]
     try:
         print('  - text :', text) 
-        link = googlesearch.lucky(site_filter+' '+text)
+        link = googlesearch.lucky(site_filter+text)
         print('    link :', link) 
         return '['+m[1]+']('+link+')'
     except Exception as e:
@@ -43,7 +54,7 @@ def process_line(line, site_filter, patterns):
     return None
 
 def process_file(src_file, site_filter, patterns, enc='UTF-8'):
-    print("INPUT : ", src_file, " with "+site_filter)
+    print('INPUT : ', src_file)
     process_count = 0
     sf = open(src_file, "rt", encoding=enc)
     df = tempfile.NamedTemporaryFile("wt", encoding=enc, delete=False)
@@ -62,6 +73,12 @@ def process_file(src_file, site_filter, patterns, enc='UTF-8'):
 
 if __name__ == '__main__':
     src_file = sys.argv[1]
-    site_filter = get_site_filter(sys.argv[2])
-    patterns = [PATTERN_DEFAULT] + sys.argv[3:]
+    site_filter = ""
+    patterns = [PATTERN_DEFAULT]
+    if len(sys.argv) > 2:
+        site_filter += get_site_filter(sys.argv[2])
+    if len(sys.argv) > 3:
+        patterns += get_patterns(sys.argv[3])
+    print("SEARCH FILTER :", site_filter)
+    print("REGEX PATTERNS :", patterns)
     process_file(src_file, site_filter, patterns)
