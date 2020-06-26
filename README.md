@@ -1,13 +1,13 @@
 # 알고리즘 문제 리스트 
 
 ## 06.21
-* [Leetcode : Final Prices With a Special Discount in a Shop](https://leetcode.com/problems/final-prices-with-a-special-discount-in-a-shop/)
-* [Leetcode : Stone Game II](https://leetcode.com/problems/stone-game-ii/)
+* Leetcode : Final Prices With a Special Discount in a Shop
+* [Leetcode : Stone Game II]
 * [Leetcode : Minimum Number of Days to Make m Bouquets](https://leetcode.com/problems/minimum-number-of-days-to-make-m-bouquets/)
 
 ## 06.13
-* [Leetcode : Word Subsets](https://leetcode.com/problems/word-subsets/)
-* [Leetcode : Shortest Path with Alternating Colors](https://leetcode.com/problems/shortest-path-with-alternating-colors/)
+* [Leetcode : Word Subsets]
+* Leetcode : Shortest Path with Alternating Colors
 * [Leetcode : Time Needed to Inform All Employees](https://leetcode.com/problems/time-needed-to-inform-all-employees/)
 
 ## 06.06
